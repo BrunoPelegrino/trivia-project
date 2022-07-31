@@ -2,7 +2,7 @@
 
 <img src="https://github.com/BrunoPelegrino/trivia-project/blob/master/Captura%20de%20tela%20de%202022-07-31%2017-46-03.png" alt="exemplo imagem">
 
-> O projeto é um aplicação de perguntas e repostas utilizando React/Redux e consumo de api.
+> O projeto é um aplicação de perguntas e repostas utilizando React/Redux e consumo de API.
 
 ## 💻 Pré-requisitos
 
