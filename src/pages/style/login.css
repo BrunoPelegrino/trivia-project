@@ -1,0 +1,14 @@
+
+
+.App-logo {
+    margin-top: 100px;
+}
+
+.button {
+    display: flex;
+    justify-content: space-around;
+}
+
+body {
+    background-color: lightskyblue;
+}
