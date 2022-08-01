@@ -6,6 +6,7 @@ import {
   removeUserAction,
   updateScoreAction,
   updateAssertionsAction } from '../redux/action';
+  import './style/game.css';
 
 class Game extends React.Component {
   state = {
@@ -117,65 +118,101 @@ class Game extends React.Component {
       randomAnswers } = this.state;
     const gravatarEmail = md5(userEmail).toString();
     return (
-      <div>
+<div id="main-div">
         <header>
-          <img
-            alt="Foto de perfil"
-            src={ `https://www.gravatar.com/avatar/${gravatarEmail}` }
-            data-testid="header-profile-picture"
-          />
-          <span data-testid="header-player-name">{ userName }</span>
-          <span data-testid="header-score">{ score }</span>
-          <span data-testid="counter">{counter}</span>
+          <div id="avatar-div" className="position-absolute top-0 start-0">
+            <img
+              id="avatar"
+              alt="Foto de perfil"
+              src={`https://www.gravatar.com/avatar/${gravatarEmail}`}
+              data-testid="header-profile-picture"
+            />
+            <span id="player-name" data-testid="header-player-name">
+              {userName}
+            </span>
+          </div>
+          <div
+            id="player-score"
+            classname="position-absolute top-50 start-0 translate-middle-y"
+          >
+            <span
+              id="score"
+              data-testid="header-score"
+            >{`Score: ${score}`}</span>
+          </div>
+          <span
+            id="timer"
+            className="position-absolute top-0 start-50 translate-middle-x"
+            data-testid="counter"
+          >
+            {counter}
+          </span>
         </header>
         <section>
           <span
             data-testid="question-category"
+            id="question-category"
+            className="position-absolute top-50 start-50 translate-middle"
           >
-            {
-              questions[questionNumber].category
-            }
+            {questions[questionNumber].category}
           </span>
           <span
             data-testid="question-text"
+            id="question-text"
+            className="position-absolute top-50 start-50 translate-middle"
           >
-            {
-              questions[questionNumber].question
-            }
+            {questions[questionNumber].question}
           </span>
-          <div data-testid="answer-options">
-            {
-              randomAnswers.length !== 0 && randomAnswers[questionNumber]
-                .map((answer, index) => (
-                  <button
-                    style={ hasAnswer
-                      ? { border: (answer === questions[questionNumber].correct_answer)
-                        ? '3px solid rgb(6, 240, 15)' : '3px solid red' } : {} }
-                    onClick={ () => this.handleClick(answer, questions[questionNumber]) }
-                    type="button"
-                    disabled={ disableButtons === true }
-                    key={ index }
-                    data-testid={
-                      answer === questions[questionNumber].correct_answer
-                        ? 'correct-answer'
-                        : `wrong-answer-${questions[questionNumber].incorrect_answers
-                          .indexOf(answer)}`
-                    }
-                  >
-                    { answer }
-                  </button>
-                ))
-            }
+          <div
+            data-testid="answer-options"
+            id="question-answers"
+            className="position-absolute top-50 start-50 translate-middle"
+          >
+            {randomAnswers.length !== 0 &&
+              randomAnswers[questionNumber].map((answer, index) => (
+                <button
+                  id="answer-btn"
+                  className="btn btn-light"
+                  style={
+                    hasAnswer
+                      ? {
+                          backgroundColor:
+                            answer === questions[questionNumber].correct_answer
+                              ? "rgb(6, 240, 15)"
+                              : "red",
+                        }
+                      : {}
+                  }
+                  onClick={() =>
+                    this.handleClick(answer, questions[questionNumber])
+                  }
+                  type="button"
+                  disabled={disableButtons === true}
+                  key={index}
+                  data-testid={
+                    answer === questions[questionNumber].correct_answer
+                      ? "correct-answer"
+                      : `wrong-answer-${questions[
+                          questionNumber
+                        ].incorrect_answers.indexOf(answer)}`
+                  }
+                >
+                  {answer}
+                </button>
+              ))}
           </div>
-          { hasAnswer === true
-          && (
+          {hasAnswer === true && (
+            <div id="next-btn">
             <button
+              className="btn btn-primary"
               data-testid="btn-next"
+              
               type="button"
-              onClick={ this.nextQuestion }
+              onClick={this.nextQuestion}
             >
               Next
             </button>
+            </div>
           )}
         </section>
       </div>
